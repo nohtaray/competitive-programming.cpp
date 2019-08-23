@@ -1,21 +1,5 @@
 #include <bits/stdc++.h>
-#include <boost/integer/common_factor_rt.hpp>
-#include <boost/multiprecision/cpp_int.hpp>
-#define rep(i, n) repr((i), 0, (n))
-#define repr(i, a, t) reps((i), (a), (t), 1)
-#define reps(i, a, t, s) for (long long (i) = (a); (i) < (long long)(t); (i) += (s))
-#define rrep(i, n) rrepr((i), (n) - 1, 0)
-#define rrepr(i, a, t) rreps((i), (a), (t), 1)
-#define rreps(i, a, t, s) for (long long (i) = (a); (i) >= (long long)(t); (i) -= (s))
-#define each(v, c) for (auto &&(v) : (c))
 using namespace std;
-namespace mp = boost::multiprecision;
-using ll = long long;
-using ull = unsigned long long;
-using ld = long double;
-using ml = mp::cpp_int;
-const long long MOD = 1e9 + 7;
-const long long INF = 1e18;
 
 /**
  * https://ja.wikipedia.org/wiki/クヌース–モリス–プラット法
@@ -24,7 +8,7 @@ const long long INF = 1e18;
 class KMP {
  private:
   string needle;
-  vector<ll> kmp;
+  vector<long long> kmp;
 
  public:
   explicit KMP(const string &needle) : needle(needle), kmp(needle.size() + 2, 0) {
@@ -32,8 +16,8 @@ class KMP {
     kmp[0] = -1;
     kmp[1] = 0;
     {
-      ll i = 2;
-      ll j = 0;
+      long long i = 2;
+      long long j = 0;
       while (i < needle.size()) {
         if (needle[i - 1] == needle[j]) {
           kmp.at(i++) = ++j;
@@ -51,7 +35,7 @@ class KMP {
    * @param m The position of the current character in haystack
    * @param i The position of the current character in needle
    */
-  ll index_of(const string &haystack, ll m = 0, ll i = 0) {
+  long long index_of(const string &haystack, long long m = 0, long long i = 0) {
     while (m + i < haystack.size()) {
       if (needle.at(i) == haystack.at(m + i)) {
         if (++i == needle.size()) {
@@ -71,16 +55,16 @@ class KMP {
    * ret[i]: haystack[i] 以降の文字列の最初が needle と同じなら true
    * @param haystack
    */
-  vector<ll> search(const string &haystack) {
-    vector<ll> ret(haystack.size(), false);
+  vector<long long> search(const string &haystack) {
+    vector<long long> ret(haystack.size(), false);
 
-    ll m = 0;
-    ll i = 0;
+    long long m = 0;
+    long long i = 0;
     while (m + i < haystack.size()) {
       m = index_of(haystack, m, i);
       if (m < 0) break;
       ret.at(m) = true;
-      m += needle.size() - kmp.at(needle.size() - 1) - 1;
+      m += (long long) needle.size() - kmp.at(needle.size() - 1) - 1;
       i = max(0ll, kmp.at(needle.size() - 1));
     }
     return ret;
