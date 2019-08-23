@@ -8,6 +8,7 @@
 #define rrepr(i, a, t) rreps((i), (a), (t), 1)
 #define rreps(i, a, t, s) for (long long (i) = (a); (i) >= (long long)(t); (i) -= (s))
 #define each(v, c) for (auto &&(v) : (c))
+#define all(c) (c).begin(), (c).end()
 using namespace std;
 namespace mp = boost::multiprecision;
 using ll = long long;
