@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <boost/format.hpp>
 #include <boost/integer/common_factor_rt.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 #define rep(i, n) repr((i), 0, (n))
