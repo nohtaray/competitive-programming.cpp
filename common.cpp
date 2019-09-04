@@ -16,6 +16,9 @@ using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
 using ml = mp::cpp_int;
+template<typename T>
+using optional = boost::optional<T>;
+const auto none = boost::none;
 const long long MOD = 1e9 + 7;
 const long long INF = 1e18;
 
