@@ -3,30 +3,21 @@ using namespace std;
 
 /**
  * 座標圧縮
- * values を 1 以上の整数に圧縮したベクタを生成する
  * @tparam T
  * @param values
+ * @param origin
  */
 template<typename T>
-vector<long long> compress(vector<T> &values) {
-  vector<long long> ret(values.size());
-  vector<pair<T, unsigned long long>> V(values.size());
-
-  for (long long i = 0; i < values.size(); ++i) {
-    V[i] = make_pair(values[i], i);
+vector<long long> compress(const vector<T> &values, long long origin = 0) {
+  unordered_map<T, long long> idx;
+  long long i = origin;
+  for (auto &&v : set<T>(values.begin(), values.end())) {
+    idx[v] = i++;
   }
-  sort(V.begin(), V.end());
 
-  long long cnt = 1;
-  T prev = V[0].first;
-  for (const auto &vi : V) {
-    T v;
-    long long i;
-    tie(v, i) = vi;
-
-    if (prev != v) cnt++;
-    ret[i] = cnt;
-    prev = v;
+  vector<long long> ret;
+  for (auto &&v : values) {
+    ret.push_back(idx[v]);
   }
   return ret;
 }
