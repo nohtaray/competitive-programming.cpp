@@ -52,6 +52,7 @@ ostream &operator<<(ostream &os, const pair<S, T> &p) {
 }
 
 int main() {
+  cout << fixed << setprecision(10);
   cin.tie(nullptr);
   ios::sync_with_stdio(false);
   ifstream ifs;
