@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <boost/tuple/tuple_io.hpp>
 using namespace std;
 
 template<typename T>
@@ -44,6 +45,23 @@ ostream &operator<<(ostream &os, const unordered_map<S, T> &m) {
 template<typename S, typename T>
 ostream &operator<<(ostream &os, const pair<S, T> &p) {
   return os << "pair{" << p.first << ", " << p.second << "}";
+}
+
+// https://stackoverflow.com/a/29224175
+template<typename StdTuple, std::size_t... Is>
+auto to_boost_tuple(StdTuple &&stdTuple, std::index_sequence<Is...>) {
+  return boost::tuple<std::tuple_element_t<Is, std::decay_t<StdTuple>>...>
+      (std::get<Is>(std::forward<StdTuple>(stdTuple))...);
+}
+template<typename StdTuple>
+auto to_boost_tuple(StdTuple &&stdTuple) {
+  return to_boost_tuple(std::forward<StdTuple>(stdTuple),
+                        std::make_index_sequence<std::tuple_size<std::decay_t<StdTuple>>::value>());
+}
+template<typename ...T>
+ostream &operator<<(ostream &os, const tuple<T...> &t) {
+  // boost::tuple はそのまんま出力できる
+  return cout << to_boost_tuple(t);
 }
 
 /**
