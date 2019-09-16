@@ -2,6 +2,22 @@
 using namespace std;
 
 /**
+ * TODO: 逆順にソートできるようにしたい
+ * @tparam T
+ * @param vec
+ */
+template<typename T>
+vector<unsigned long> argsort(const vector<T> &vec) {
+  vector<pair<T, unsigned long>> values;
+  vector<unsigned long> ret;
+
+  for (unsigned long i = 0; i < vec.size(); ++i) values.emplace_back(vec[i], i);
+  sort(values.begin(), values.end());
+  for (const auto &item: values) ret.push_back(item.second);
+  return ret;
+}
+
+/**
  * 座標圧縮
  * @tparam T
  * @param values
