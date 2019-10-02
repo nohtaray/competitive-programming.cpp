@@ -20,6 +20,16 @@ long long mod_pow(long long x, long long y, long long mod) {
 }
 
 /**
+ * (a / b) % mod
+ * @param a
+ * @param b
+ * @param mod
+ */
+long long div_mod(long long a, long long b, long long mod) {
+  return a * mod_pow(b, mod - 2, mod) % mod;
+}
+
+/**
  * 素因数分解
  * @param n
  */
@@ -41,5 +51,23 @@ vector<long long> get_factors(long long n) {
     }
   }
   ret.push_back(n);
+  return ret;
+}
+
+/**
+ * n の約数
+ * @param n
+ */
+vector<long long> get_divisors(long long n) {
+  vector<long long> ret;
+  long long rt = (long long) sqrt(n) + 1;
+  for (long long i = 1; i < rt; ++i) {
+    if (n % i == 0) {
+      ret.push_back(i);
+      if (n / i != i) {
+        ret.push_back(n / i);
+      }
+    }
+  }
   return ret;
 }
