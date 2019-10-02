@@ -37,3 +37,33 @@ vector<long long> compress(const vector<T> &values, long long origin = 0) {
   }
   return ret;
 }
+
+/**
+ * 0 から max までの逆元
+ * @param max
+ * @param mod
+ * @return
+ */
+vector<long long> mod_invs(long long max, long long mod) {
+  vector<long long> invs(max + 1, 1);
+  for (long long x = 2; x <= max; ++x) {
+    invs[x] = (-(mod / x) * invs[mod % x]) % mod;
+  }
+  return invs;
+}
+
+/**
+ * 階乗 0!, 1!, 2!, ..., max! の逆元
+ * @param max
+ * @param mod
+ * @return
+ */
+vector<long long> factorial_invs(long long max, long long mod) {
+  vector<long long> ret;
+  long long r = 1;
+  for (const auto &inv : mod_invs(max, mod)) {
+    r = r * inv % mod;
+    ret.push_back(r);
+  }
+  return ret;
+}
