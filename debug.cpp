@@ -42,6 +42,14 @@ ostream &operator<<(ostream &os, const unordered_map<S, T> &m) {
     os << ", " << (*it).first << ": " << (*it).second;
   return os << "}";
 }
+template<typename T>
+ostream &operator<<(ostream &os, const deque<T> &q) {
+  if (q.empty()) return os << "deque{}";
+  os << "deque{" << *q.begin();
+  for (auto it = ++q.begin(); it != q.end(); ++it)
+    os << ", " << *it;
+  return os << "}";
+}
 template<typename S, typename T>
 ostream &operator<<(ostream &os, const pair<S, T> &p) {
   return os << "pair{" << p.first << ", " << p.second << "}";
