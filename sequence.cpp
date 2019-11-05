@@ -39,6 +39,30 @@ vector<long long> compress(const vector<T> &values, long long origin = 0) {
 }
 
 /**
+ * 0!, 1!, 2!, ..., max!
+ * @param max
+ * @param mod
+ * @return
+ */
+vector<long long> get_factorials(long long max, long long mod = 0) {
+  vector<long long> ret(max + 1, 1);
+  long long n = 1;
+  if (mod > 0) {
+    for (long long i = 1; i <= max; ++i) {
+      n *= i;
+      n %= mod;
+      ret[i] = n;
+    }
+  } else {
+    for (long long i = 1; i <= max; ++i) {
+      n *= i;
+      ret[i] = n;
+    }
+  }
+  return ret;
+}
+
+/**
  * 0 から max までの逆元
  * @param max
  * @param mod
@@ -47,7 +71,7 @@ vector<long long> compress(const vector<T> &values, long long origin = 0) {
 vector<long long> mod_invs(long long max, long long mod) {
   vector<long long> invs(max + 1, 1);
   for (long long x = 2; x <= max; ++x) {
-    invs[x] = (-(mod / x) * invs[mod % x]) % mod;
+    invs[x] = (mod - mod / x) * invs[mod % x] % mod;
   }
   return invs;
 }
