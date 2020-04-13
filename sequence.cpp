@@ -70,6 +70,7 @@ vector<long long> get_factorials(long long max, long long mod = 0) {
  */
 vector<long long> mod_invs(long long max, long long mod) {
   vector<long long> invs(max + 1, 1);
+  invs[0] = 0;
   for (long long x = 2; x <= max; ++x) {
     invs[x] = (mod - mod / x) * invs[mod % x] % mod;
   }
