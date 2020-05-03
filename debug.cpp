@@ -81,19 +81,3 @@ template<typename T>
 string bin(T value) {
   return bitset<sizeof(value) * CHAR_BIT>(value).to_string();
 }
-
-/**
- * 処理時間を計る
- * timer("<procedure name>", [&]{
- *   ...
- * });
- * @param name
- * @param fn
- */
-void timer(string name, const function<void(void)> &fn) {
-  auto st = chrono::system_clock::now();
-  fn();
-  auto now = chrono::system_clock::now();
-  double t = chrono::duration_cast<chrono::milliseconds>(now - st).count();
-  cerr << boost::format("[%s] %4d ms") % name % t << "\n";
-}
