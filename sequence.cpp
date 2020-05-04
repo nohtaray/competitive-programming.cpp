@@ -7,11 +7,11 @@ using namespace std;
  * @param vec
  */
 template<typename T>
-vector<unsigned long> argsort(const vector<T> &vec) {
-  vector<pair<T, unsigned long>> values;
-  vector<unsigned long> ret;
+vector<long long> argsort(const vector<T> &vec) {
+  vector<pair<T, long long>> values;
+  vector<long long> ret;
 
-  for (unsigned long i = 0; i < vec.size(); ++i) values.emplace_back(vec[i], i);
+  for (long long i = 0; i < vec.size(); ++i) values.emplace_back(vec[i], i);
   sort(values.begin(), values.end());
   for (const auto &item: values) ret.push_back(item.second);
   return ret;
