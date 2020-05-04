@@ -2,17 +2,24 @@
 using namespace std;
 
 /**
- * TODO: 逆順にソートできるようにしたい
+ * 逆順にするなら
+ * auto idx = argsort<ll>(vec, [](const auto &a, const auto &b) { return b < a; });
+ * みたいにする
  * @tparam T
  * @param vec
+ * @param comparator
  */
 template<typename T>
-vector<long long> argsort(const vector<T> &vec) {
+vector<long long> argsort(
+    const vector<T> &vec,
+    const function<bool(const T &, const T &)> &comparator = [](const auto &a, const auto &b) { return a < b; }) {
   vector<pair<T, long long>> values;
   vector<long long> ret;
 
   for (long long i = 0; i < vec.size(); ++i) values.emplace_back(vec[i], i);
-  sort(values.begin(), values.end());
+  stable_sort(values.begin(), values.end(), [&comparator](const auto &a, const auto &b) {
+    return comparator(a.first, b.first);
+  });
   for (const auto &item: values) ret.push_back(item.second);
   return ret;
 }
