@@ -99,6 +99,17 @@
 #define all(c) (c).begin(), (c).end()
 
 using namespace std;
+
+// コンテナのメンバ関数を使わないと O(N) おぼえたらけす
+template<typename T>
+typename set<T>::iterator lower_bound(typename set<T>::iterator l, typename set<T>::iterator r, const T &v);
+template<typename T>
+typename set<T>::iterator upper_bound(typename set<T>::iterator l, typename set<T>::iterator r, const T &v);
+template<typename S, typename T>
+typename map<S, T>::iterator lower_bound(typename map<S, T>::iterator l, typename map<S, T>::iterator r, const T &v);
+template<typename S, typename T>
+typename map<S, T>::iterator upper_bound(typename map<S, T>::iterator l, typename map<S, T>::iterator r, const T &v);
+
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
